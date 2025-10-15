@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -51,13 +51,7 @@ export function GitHubSection() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
-    if (config.github?.owner && config.github?.repo) {
-      fetchGitHubData()
-    }
-  }, [config.github?.owner, config.github?.repo])
-
-  const fetchGitHubData = async () => {
+  const fetchGitHubData = useCallback(async () => {
     if (!config.github?.owner || !config.github?.repo) return
 
     setLoading(true)
@@ -81,7 +75,13 @@ export function GitHubSection() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [config.github?.owner, config.github?.repo])
+
+  useEffect(() => {
+    if (config.github?.owner && config.github?.repo) {
+      fetchGitHubData()
+    }
+  }, [config.github?.owner, config.github?.repo, fetchGitHubData])
 
   const keyMetrics = data ? (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -124,7 +124,7 @@ export function GitHubSection() {
       {!config.github?.owner || !config.github?.repo ? (
         <div className="text-center py-8">
           <p className="text-muted-foreground mb-4">
-            No GitHub repository configured. Click "Project Settings" to configure your repository.
+            No GitHub repository configured. Click &quot;Project Settings&quot; to configure your repository.
           </p>
         </div>
       ) : data && (

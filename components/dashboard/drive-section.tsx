@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -38,13 +38,7 @@ export function DriveSection() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
-    if (config.googleDrive?.folderId) {
-      fetchDriveData()
-    }
-  }, [config.googleDrive?.folderId])
-
-  const fetchDriveData = async () => {
+  const fetchDriveData = useCallback(async () => {
     if (!config.googleDrive?.folderId) return
 
     setLoading(true)
@@ -68,7 +62,13 @@ export function DriveSection() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [config.googleDrive?.folderId])
+
+  useEffect(() => {
+    if (config.googleDrive?.folderId) {
+      fetchDriveData()
+    }
+  }, [config.googleDrive?.folderId, fetchDriveData])
 
   const keyMetrics = data ? (
     <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -126,7 +126,7 @@ export function DriveSection() {
       {!config.googleDrive?.folderId ? (
         <div className="text-center py-8">
           <p className="text-muted-foreground mb-4">
-            No Google Drive folder configured. Click "Project Settings" to configure your folder.
+            No Google Drive folder configured. Click &quot;Project Settings&quot; to configure your folder.
           </p>
         </div>
       ) : data && (

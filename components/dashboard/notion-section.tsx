@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -35,13 +35,7 @@ export function NotionSection() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
-    if (config.notion?.databaseId) {
-      fetchNotionData()
-    }
-  }, [config.notion?.databaseId])
-
-  const fetchNotionData = async () => {
+  const fetchNotionData = useCallback(async () => {
     if (!config.notion?.databaseId) return
 
     setLoading(true)
@@ -65,7 +59,13 @@ export function NotionSection() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [config.notion?.databaseId])
+
+  useEffect(() => {
+    if (config.notion?.databaseId) {
+      fetchNotionData()
+    }
+  }, [config.notion?.databaseId, fetchNotionData])
 
   const keyMetrics = data ? (
     <div className="grid grid-cols-2 gap-4">
@@ -108,7 +108,7 @@ export function NotionSection() {
       {!config.notion?.databaseId ? (
         <div className="text-center py-8">
           <p className="text-muted-foreground mb-4">
-            No Notion database configured. Click "Project Settings" to configure your database.
+            No Notion database configured. Click &quot;Project Settings&quot; to configure your database.
           </p>
         </div>
       ) : data && (

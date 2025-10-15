@@ -34,7 +34,7 @@ export function ReportsSection() {
             No reports available. Reports will be generated from connected data sources.
           </p>
           <p className="text-xs text-muted-foreground mt-2">
-            Click "Generate New Report" to create your first weekly summary.
+            Click &quot;Generate New Report&quot; to create your first weekly summary.
           </p>
         </div>
       </div>

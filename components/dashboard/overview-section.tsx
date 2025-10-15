@@ -41,7 +41,7 @@ export function OverviewSection() {
             No milestones created yet. Milestones help track major project achievements and deadlines.
           </p>
           <p className="text-xs text-muted-foreground mt-2">
-            Click "Add Milestone" to create your first project milestone.
+            Click &quot;Add Milestone&quot; to create your first project milestone.
           </p>
         </div>
       </div>
