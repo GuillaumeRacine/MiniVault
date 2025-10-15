@@ -1,4 +1,4 @@
-import NextAuth from "next-auth"
+import NextAuth, { AuthOptions } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import GitHubProvider from "next-auth/providers/github"
 
@@ -10,7 +10,7 @@ console.log("[NextAuth] GITHUB_ID:", process.env.GITHUB_ID ? "✓ Set" : "✗ Mi
 console.log("[NextAuth] GITHUB_SECRET:", process.env.GITHUB_SECRET ? "✓ Set" : "✗ Missing")
 console.log("[NextAuth] NEXTAUTH_SECRET:", process.env.NEXTAUTH_SECRET ? "✓ Set" : "✗ Missing")
 
-const handler = NextAuth({
+export const authOptions: AuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -65,6 +65,8 @@ const handler = NextAuth({
     signIn: "/auth/signin"
   },
   debug: true
-})
+}
+
+const handler = NextAuth(authOptions)
 
 export { handler as GET, handler as POST }

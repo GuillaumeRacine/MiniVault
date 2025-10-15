@@ -50,9 +50,9 @@ export function MainDashboard() {
         <DashboardHeader />
         <div className="space-y-6">
           <OverviewSection />
+          <GuidesDocsSection />
           <GoalsMetricsSection />
           <UserFeedbackSection />
-          <GuidesDocsSection />
         </div>
       </div>
     </div>
