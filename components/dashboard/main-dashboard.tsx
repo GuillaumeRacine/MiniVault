@@ -4,19 +4,28 @@ import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 import { DashboardHeader } from "./header"
-import { MetricsSection } from "./metrics-section"
-import { ProjectTrackingSection } from "./project-tracking-section"
-import { ReportsSection } from "./reports-section"
-import { KnowledgeSection } from "./knowledge-section"
+import { OverviewSection } from "./overview-section"
+import { GoalsMetricsSection } from "./goals-metrics-section"
+import { UserFeedbackSection } from "./user-feedback-section"
+import { GuidesDocsSection } from "./guides-docs-section"
 
 export function MainDashboard() {
   const { data: session, status } = useSession()
   const router = useRouter()
 
+  console.log("[MainDashboard] Rendering - Status:", status, "Has Session:", !!session)
+
   useEffect(() => {
-    if (status === "loading") return
+    console.log("[MainDashboard] useEffect triggered - Status:", status, "Has Session:", !!session)
+    if (status === "loading") {
+      console.log("[MainDashboard] Still loading session...")
+      return
+    }
     if (!session) {
+      console.log("[MainDashboard] No session found, redirecting to signin...")
       router.push("/auth/signin")
+    } else {
+      console.log("[MainDashboard] Session found for user:", session.user?.email)
     }
   }, [session, status, router])
 
@@ -40,10 +49,10 @@ export function MainDashboard() {
       <div className="container mx-auto py-6 space-y-6">
         <DashboardHeader />
         <div className="space-y-6">
-          <MetricsSection />
-          <ProjectTrackingSection />
-          <ReportsSection />
-          <KnowledgeSection />
+          <OverviewSection />
+          <GoalsMetricsSection />
+          <UserFeedbackSection />
+          <GuidesDocsSection />
         </div>
       </div>
     </div>

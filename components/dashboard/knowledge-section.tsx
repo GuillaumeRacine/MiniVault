@@ -9,15 +9,15 @@ export function KnowledgeSection() {
   const keyMetrics = (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
       <div className="text-center">
-        <div className="text-2xl font-bold text-primary">24</div>
+        <div className="text-2xl font-bold text-muted-foreground">-</div>
         <div className="text-sm text-muted-foreground">Documents</div>
       </div>
       <div className="text-center">
-        <div className="text-2xl font-bold text-purple-500">6</div>
+        <div className="text-2xl font-bold text-muted-foreground">-</div>
         <div className="text-sm text-muted-foreground">Knowledge Areas</div>
       </div>
       <div className="text-center">
-        <div className="text-2xl font-bold text-orange-500">2 days</div>
+        <div className="text-2xl font-bold text-muted-foreground">-</div>
         <div className="text-sm text-muted-foreground">Last Updated</div>
       </div>
     </div>
@@ -30,51 +30,22 @@ export function KnowledgeSection() {
           <h4 className="font-semibold">Recent Documents</h4>
           <Button size="sm">Create New</Button>
         </div>
-        <div className="space-y-3">
-          {[
-            { title: "API Integration Guide", type: "Google Docs", category: "Technical", lastModified: "2 hours ago" },
-            { title: "Team Onboarding Checklist", type: "Notion", category: "Process", lastModified: "1 day ago" },
-            { title: "Project Requirements", type: "Google Docs", category: "Planning", lastModified: "3 days ago" },
-            { title: "Code Review Guidelines", type: "GitHub", category: "Technical", lastModified: "1 week ago" },
-          ].map((doc, i) => (
-            <Card key={i}>
-              <CardContent className="p-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex-1">
-                    <h5 className="font-medium">{doc.title}</h5>
-                    <p className="text-sm text-muted-foreground">
-                      {doc.type} • Updated {doc.lastModified}
-                    </p>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Badge variant="secondary">{doc.category}</Badge>
-                    <Button size="sm" variant="outline">Open</Button>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+        <div className="p-8 border rounded-lg text-center">
+          <p className="text-sm text-muted-foreground">
+            No documents available. Documents will be fetched from Google Drive and Notion.
+          </p>
+          <p className="text-xs text-muted-foreground mt-2">
+            Connect to Google Drive and Notion to see your knowledge base.
+          </p>
         </div>
       </div>
 
       <div>
         <h4 className="font-semibold mb-3">Knowledge Categories</h4>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-          {[
-            { name: "Technical Docs", count: 8 },
-            { name: "Process & Workflows", count: 6 },
-            { name: "Project Planning", count: 4 },
-            { name: "Team Guidelines", count: 3 },
-            { name: "Architecture", count: 2 },
-            { name: "Meeting Notes", count: 1 },
-          ].map((category, i) => (
-            <Card key={i} className="p-3">
-              <div className="text-center">
-                <div className="font-medium">{category.name}</div>
-                <div className="text-sm text-muted-foreground">{category.count} documents</div>
-              </div>
-            </Card>
-          ))}
+        <div className="p-4 border rounded-lg text-center">
+          <p className="text-sm text-muted-foreground">
+            Categories will be automatically organized once documents are loaded.
+          </p>
         </div>
       </div>
 

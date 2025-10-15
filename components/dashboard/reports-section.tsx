@@ -8,15 +8,15 @@ export function ReportsSection() {
   const keyMetrics = (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
       <div className="text-center">
-        <div className="text-2xl font-bold text-primary">3</div>
+        <div className="text-2xl font-bold text-muted-foreground">-</div>
         <div className="text-sm text-muted-foreground">Reports Generated</div>
       </div>
       <div className="text-center">
-        <div className="text-2xl font-bold text-green-500">92%</div>
+        <div className="text-2xl font-bold text-muted-foreground">-</div>
         <div className="text-sm text-muted-foreground">Data Coverage</div>
       </div>
       <div className="text-center">
-        <div className="text-2xl font-bold text-blue-500">Last Week</div>
+        <div className="text-2xl font-bold text-muted-foreground">-</div>
         <div className="text-sm text-muted-foreground">Latest Report</div>
       </div>
     </div>
@@ -29,27 +29,13 @@ export function ReportsSection() {
           <h4 className="font-semibold">Weekly Reports</h4>
           <Button size="sm">Generate New Report</Button>
         </div>
-        <div className="space-y-3">
-          {[
-            { title: "Week of Oct 2-8, 2024", status: "Complete", highlights: "3 major milestones, 0 blockers" },
-            { title: "Week of Sep 25-Oct 1, 2024", status: "Complete", highlights: "2 releases, 1 critical fix" },
-            { title: "Week of Sep 18-24, 2024", status: "Complete", highlights: "Sprint planning, team onboarding" },
-          ].map((report, i) => (
-            <Card key={i}>
-              <CardContent className="p-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h5 className="font-medium">{report.title}</h5>
-                    <p className="text-sm text-muted-foreground">{report.highlights}</p>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <span className="text-xs text-green-500">{report.status}</span>
-                    <Button size="sm" variant="outline">View</Button>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+        <div className="p-8 border rounded-lg text-center">
+          <p className="text-sm text-muted-foreground">
+            No reports available. Reports will be generated from connected data sources.
+          </p>
+          <p className="text-xs text-muted-foreground mt-2">
+            Click "Generate New Report" to create your first weekly summary.
+          </p>
         </div>
       </div>
 
@@ -58,15 +44,15 @@ export function ReportsSection() {
         <div className="p-4 border rounded-lg space-y-2">
           <div className="flex items-center justify-between">
             <span className="text-sm">Auto-generate weekly reports</span>
-            <span className="text-sm text-green-500">Enabled</span>
+            <span className="text-sm text-muted-foreground">Not configured</span>
           </div>
           <div className="flex items-center justify-between">
             <span className="text-sm">Include metrics from all sources</span>
-            <span className="text-sm text-green-500">Enabled</span>
+            <span className="text-sm text-muted-foreground">Not configured</span>
           </div>
           <div className="flex items-center justify-between">
             <span className="text-sm">Email to stakeholders</span>
-            <span className="text-sm text-muted-foreground">Disabled</span>
+            <span className="text-sm text-muted-foreground">Not configured</span>
           </div>
         </div>
       </div>

@@ -10,8 +10,8 @@ interface DashboardSectionProps {
   title: string
   description: string
   icon: string
-  keyMetrics: React.ReactNode
-  detailedContent: React.ReactNode
+  keyMetrics?: React.ReactNode
+  detailedContent?: React.ReactNode
   defaultOpen?: boolean
 }
 
@@ -46,16 +46,20 @@ export function DashboardSection({
                 )}
               </Button>
             </div>
-            <div className="mt-4">
-              {keyMetrics}
-            </div>
+            {keyMetrics && (
+              <div className="mt-4">
+                {keyMetrics}
+              </div>
+            )}
           </CardHeader>
         </CollapsibleTrigger>
-        <CollapsibleContent>
-          <CardContent>
-            {detailedContent}
-          </CardContent>
-        </CollapsibleContent>
+        {detailedContent && (
+          <CollapsibleContent>
+            <CardContent>
+              {detailedContent}
+            </CardContent>
+          </CollapsibleContent>
+        )}
       </Collapsible>
     </Card>
   )

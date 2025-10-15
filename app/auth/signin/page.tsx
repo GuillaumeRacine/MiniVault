@@ -8,10 +8,18 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 export default function SignIn() {
   const [providers, setProviders] = useState<any>(null)
 
+  console.log("[SignIn] Page rendering, providers:", providers)
+
   useEffect(() => {
+    console.log("[SignIn] useEffect - Fetching providers...")
     const setAuthProviders = async () => {
-      const res = await getProviders()
-      setProviders(res)
+      try {
+        const res = await getProviders()
+        console.log("[SignIn] Providers fetched successfully:", res)
+        setProviders(res)
+      } catch (error) {
+        console.error("[SignIn] Error fetching providers:", error)
+      }
     }
     setAuthProviders()
   }, [])
@@ -33,7 +41,10 @@ export default function SignIn() {
           {Object.values(providers).map((provider: any) => (
             <Button
               key={provider.name}
-              onClick={() => signIn(provider.id, { callbackUrl: "/" })}
+              onClick={() => {
+                console.log("[SignIn] Sign in button clicked for provider:", provider.name)
+                signIn(provider.id, { callbackUrl: "/" })
+              }}
               className="w-full"
               variant="outline"
             >
